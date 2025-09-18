@@ -63,3 +63,12 @@ button {
 button:hover {
   background: #1a01fa;
 }
+
+#successMessage {
+  margin-top: 15px;
+  font-size: 1em;
+  font-weight: bold;
+  color: green;
+  text-align: center;
+  display: none; 
+}

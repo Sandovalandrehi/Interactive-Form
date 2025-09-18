@@ -3,6 +3,7 @@ const form = document.getElementById("myForm");
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const phoneInput = document.getElementById("phone");
+const successMessage = document.getElementById("successMessage");
 
 // funcion para mostrar errores
 function showError(input, message) {
@@ -12,7 +13,7 @@ function showError(input, message) {
   input.style.borderColor = "red";
 }
 
-// funcion para mostrar (se envio con exito)
+// funcion para mostrar el exito
 function showSuccess(input) {
   const error = input.nextElementSibling;
   error.textContent = "";
@@ -47,8 +48,26 @@ phoneInput.addEventListener("input", () => {
   }
 });
 
-// evitar el envio si hay errores
+// evitar envio si hay errores
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  alert("Form sent successfully");
+
+  const errors = document.querySelectorAll(".error");
+  let valid = true;
+  errors.forEach(err => {
+    if (err.textContent !== "") {
+      valid = false;
+    }
+  });
+
+  if (valid) {
+    successMessage.textContent = "Form sent successfully";
+    successMessage.style.display = "block";
+    form.reset(); // limpiar el formulario y resetear estilos
+    [nameInput, emailInput, phoneInput].forEach(input => {
+      input.style.borderColor = "#ccc";
+    });
+  } else {
+    successMessage.style.display = "none";
+  }
 });
